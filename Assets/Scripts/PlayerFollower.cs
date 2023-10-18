@@ -13,7 +13,7 @@ namespace DefaultNamespace
             offset = this.transform.position - player.transform.position;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             this.transform.SetPositionAndRotation(player.transform.position+offset,Quaternion.Euler(0,0,0));
         }
