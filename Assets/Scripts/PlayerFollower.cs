@@ -8,6 +8,7 @@ namespace DefaultNamespace
     {
         public GameObject player;
         private Vector3 offset;
+        private Player _player;
         private void Start()
         {
             offset = this.transform.position - player.transform.position;

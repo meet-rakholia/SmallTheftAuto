@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -7,10 +8,17 @@ namespace DefaultNamespace
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == "Player")
+            Player currentPlayer = other.GetComponent<Player>();
+            if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle)
             {
-                Player currentPLayer = other.GetComponent<Player>();
-                currentPLayer.isInVehicle = true;
+                currentPlayer.isInVehicle = true;
+                GameObject vehicle = GameObject.Find("Vehicle");
+                other.transform.rotation = quaternion.Euler(0.0f,0.0f,0.0f);
+                vehicle.transform.parent = other.transform;
+                SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
+                spriteRenderer.enabled = false;
+                BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
+                boxCollider2D.enabled = false;
             }
         }
     }

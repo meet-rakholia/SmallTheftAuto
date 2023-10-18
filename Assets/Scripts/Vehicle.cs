@@ -4,7 +4,7 @@ namespace DefaultNamespace
 {
     public class Vehicle : MonoBehaviour
     {
-        private Player Player;
+        public Player player;
         
         
         
