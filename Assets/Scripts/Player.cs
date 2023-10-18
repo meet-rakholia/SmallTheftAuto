@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace DefaultNamespace
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
-        
+        public bool isInVehicle;
     }
 }

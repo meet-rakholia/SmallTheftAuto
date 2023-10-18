@@ -12,6 +12,7 @@ namespace DefaultNamespace
         {
             offset = this.transform.position - player.transform.position;
         }
+        
 
         private void LateUpdate()
         {

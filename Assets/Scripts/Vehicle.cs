@@ -1,7 +1,12 @@
+using UnityEngine;
+
 namespace DefaultNamespace
 {
-    public class Vehicle
+    public class Vehicle : MonoBehaviour
     {
-        public Player Player;
+        private Player Player;
+        
+        
+        
     }
 }
