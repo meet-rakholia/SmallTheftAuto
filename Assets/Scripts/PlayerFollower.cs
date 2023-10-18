@@ -15,7 +15,7 @@ namespace DefaultNamespace
 
         private void LateUpdate()
         {
-            this.transform.SetPositionAndRotation(player.transform.position+offset,Quaternion.Euler(0,0,0));
-        }
+            Vector3 desiredPosition = player.transform.position + offset;
+            this.transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.99f * Time.deltaTime);        }
     }
 }

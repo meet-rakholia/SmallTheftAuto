@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
-
+        
         Vector3 currentOrientation = this.transform.eulerAngles;
         float newRotation = currentOrientation.z - horizontalInput*playerTurnRate * Time.deltaTime;
         this.transform.rotation = UnityEngine.Quaternion.Euler(0.0f,0.0f,newRotation);
