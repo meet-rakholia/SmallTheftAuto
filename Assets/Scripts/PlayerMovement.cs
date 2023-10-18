@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using Quaternion = System.Numerics.Quaternion;
 
 public class PlayerMovement : MonoBehaviour
 {
     
     // Start is called before the first frame update
-    public int playerRunningSpeed = 1;
-    private Animator _animator;
-    private static readonly int MoveX = Animator.StringToHash("MoveX");
+    public float playerRunningSpeed = 1.0f;
+    public float playerTurnRate = 30.0f;
+    private Animator _animator; 
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     void Start()
     {
@@ -23,14 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
+
+        Vector3 currentOrientation = this.transform.eulerAngles;
+        float newRotation = currentOrientation.z - horizontalInput*playerTurnRate * Time.deltaTime;
+        this.transform.rotation = UnityEngine.Quaternion.Euler(0.0f,0.0f,newRotation);
         
-        
-        
-        Vector3 movement = new Vector3(horizontalInput,verticalInput, 0.0f) * playerRunningSpeed;
+        Vector3 movement = new Vector3(0.0f,verticalInput, 0.0f) * playerRunningSpeed;
         this.transform.Translate(movement*Time.deltaTime);
-        _animator.SetFloat("MoveX",horizontalInput);
-        _animator.SetFloat("MoveY",verticalInput);
-        _animator.SetBool("isMoving",movement.magnitude > 0);
+        _animator.SetBool(IsMoving,movement.magnitude > 0);
     }
     
 }
