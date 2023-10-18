@@ -14,6 +14,7 @@ namespace DefaultNamespace
                 currentPlayer.isInVehicle = true;
                 GameObject vehicle = GameObject.Find("Vehicle");
                 other.transform.rotation = quaternion.Euler(0.0f,0.0f,0.0f);
+                Debug.Log(vehicle.transform.parent);
                 vehicle.transform.parent = other.transform;
                 SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
                 spriteRenderer.enabled = false;
