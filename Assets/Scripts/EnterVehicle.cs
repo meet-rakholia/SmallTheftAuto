@@ -11,7 +11,7 @@ namespace DefaultNamespace
             Player currentPlayer = other.GetComponent<Player>();
             if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle)
             {
-                GameObject vehicle = GameObject.Find("Vehicle");
+                GameObject vehicle = this.transform.parent.gameObject;
                 BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
                 SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
                 Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
@@ -25,6 +25,7 @@ namespace DefaultNamespace
                 transform2.rotation = vehicle.transform.rotation;
                 transform2.parent = vehicle.transform;
                 playerBody.isKinematic = true;
+                vehicle.name = "CurrentVehicle";
                 // spriteRenderer.enabled = false;
             }
         }
