@@ -12,14 +12,15 @@ namespace DefaultNamespace
             if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle)
             {
                 currentPlayer.isInVehicle = true;
-                GameObject vehicle = GameObject.Find("Vehicle");
-                other.transform.rotation = quaternion.Euler(0.0f,0.0f,0.0f);
-                Debug.Log(vehicle.transform.parent);
-                vehicle.transform.parent = other.transform;
-                SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
-                spriteRenderer.enabled = false;
                 BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
                 boxCollider2D.enabled = false;
+                GameObject vehicle = GameObject.Find("Vehicle");
+                var transform1 = other.transform;
+                transform1.position = vehicle.transform.position;
+                transform1.rotation = vehicle.transform.rotation;
+                vehicle.transform.parent = transform1;
+                SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
+                spriteRenderer.enabled = false;
             }
         }
     }
