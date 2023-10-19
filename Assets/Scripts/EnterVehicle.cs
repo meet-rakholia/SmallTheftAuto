@@ -15,6 +15,7 @@ namespace DefaultNamespace
                 BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
                 SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
                 Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
+                Rigidbody2D playerBody = other.GetComponent<Rigidbody2D>();
 
                 currentVehicle.player = currentPlayer;
                 currentPlayer.isInVehicle = true;
@@ -23,6 +24,7 @@ namespace DefaultNamespace
                 transform2.position = vehicle.transform.position;
                 transform2.rotation = vehicle.transform.rotation;
                 transform2.parent = vehicle.transform;
+                playerBody.isKinematic = true;
                 // spriteRenderer.enabled = false;
             }
         }
