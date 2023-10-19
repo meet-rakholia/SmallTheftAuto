@@ -15,7 +15,7 @@ namespace DefaultNamespace
             _player = this.GetComponent<Player>();
             _vehicle = GameObject.Find("Vehicle");
             _spriteRenderer = this.GetComponent<SpriteRenderer>();
-            _collider = this.GetComponent<BoxCollider2D>();
+            _collider = _vehicle.GetComponentInChildren<BoxCollider2D>();
         }
 
         private void Update()
@@ -28,7 +28,7 @@ namespace DefaultNamespace
                 UnityEngine.Vector3 finalPosition = _vehicle.transform.position + relativePosition;
                 _player.transform.position = finalPosition;
                 _spriteRenderer.enabled = true;
-                _collider.enabled = true;
+                // _collider.enabled = true;
             }
         }
     }

@@ -32,28 +32,19 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        float turnRate, speed;
 
-        if (_player.isInVehicle)
+        if (!_player.isInVehicle)
         {
-            turnRate = vehicleTurnRate;
-            speed = vehicleSpeedForward;
+            Vector3 movement = new Vector3(0.0f,verticalInput, 0.0f) * playerRunningSpeed;
+            this.transform.Translate(movement*Time.deltaTime);
+            _animator.SetBool(IsMoving,movement.magnitude > 0);
+        
+            Vector3 currentOrientation = this.transform.eulerAngles;
+            float newRotation = currentOrientation.z - horizontalInput*playerTurnRate * Time.deltaTime;
+            this.transform.rotation = UnityEngine.Quaternion.Euler(0.0f,0.0f,newRotation);
 
         }
-        else
-        {
-            turnRate = playerTurnRate;
-            speed = playerRunningSpeed;
-        }
         
-        Vector3 movement = new Vector3(0.0f,verticalInput, 0.0f) * speed;
-        this.transform.Translate(movement*Time.deltaTime);
-        _animator.SetBool(IsMoving,movement.magnitude > 0);
-        
-        Vector3 currentOrientation = this.transform.eulerAngles;
-        float newRotation = currentOrientation.z - horizontalInput*turnRate * Time.deltaTime;
-        this.transform.rotation = UnityEngine.Quaternion.Euler(0.0f,0.0f,newRotation);
-
     }
     
 }

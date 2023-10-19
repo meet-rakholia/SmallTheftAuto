@@ -11,16 +11,19 @@ namespace DefaultNamespace
             Player currentPlayer = other.GetComponent<Player>();
             if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle)
             {
-                currentPlayer.isInVehicle = true;
-                BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
-                boxCollider2D.enabled = false;
                 GameObject vehicle = GameObject.Find("Vehicle");
-                var transform1 = other.transform;
-                transform1.position = vehicle.transform.position;
-                transform1.rotation = vehicle.transform.rotation;
-                vehicle.transform.parent = transform1;
+                BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
                 SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
-                spriteRenderer.enabled = false;
+                Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
+
+                currentVehicle.player = currentPlayer;
+                currentPlayer.isInVehicle = true;
+                boxCollider2D.enabled = false;
+                var transform2 = other.transform;
+                transform2.position = vehicle.transform.position;
+                transform2.rotation = vehicle.transform.rotation;
+                transform2.parent = vehicle.transform;
+                // spriteRenderer.enabled = false;
             }
         }
     }
