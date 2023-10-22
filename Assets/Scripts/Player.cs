@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,28 +11,43 @@ namespace DefaultNamespace
     {
         public bool isInVehicle;
         public int health = 50;
+        private int gold = 50;
         private Canvas _healthCanvas;
         private Image[] _health = new Image[5];
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";
         private readonly string _spritePathHalfHealth = "Sprites/Player/HalfHealth";
         private readonly string _spritePathFullHealth = "Sprites/Player/FullHealth";
+        private TextMeshProUGUI _textGold;
 
         private void Start()
         {
             GameObject canvasObject = GameObject.Find("Canvas");
             _healthCanvas = canvasObject.GetComponent<Canvas>();
             Image[] allImages = _healthCanvas.GetComponentsInChildren<Image>();
+            TextMeshProUGUI[] textMeshPros = _healthCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+            
             int j = 0;
             for (int i = 0; i < allImages.Length; i++)
             {
                 if (allImages[i].name.Contains("PlayerHealth"))
                 {
                     _health[j] = allImages[i];
-                    Debug.Log(_health[j].name);
                     j++;
                 }
             }
+            
+            for (int i = 0; i < textMeshPros.Length; i++)
+            {
+                if (textMeshPros[i].name.Contains("PlayerGold"))
+                {
+                    _textGold = textMeshPros[i];
+
+                }
+            }
+            
             UpdatePlayerHealthIcons();
+            updateGoldUI();
+
         }
 
         public void Heal()
@@ -44,6 +60,23 @@ namespace DefaultNamespace
         {
             health = Math.Min(0,health - damageAmount);
             UpdatePlayerHealthIcons();
+        }
+
+        public void UpdateGold(bool isNegative, int value)
+        {
+            if (isNegative)
+            {
+                gold = Math.Max(0, gold - value);
+            }
+            else
+            {
+                gold = gold + value;
+            }
+        }
+
+        private void updateGoldUI()
+        {
+            _textGold.text = "$" + gold.ToString();
         }
 
         private void UpdatePlayerHealthIcons()
