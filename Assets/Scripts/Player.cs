@@ -10,14 +10,16 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         public bool isInVehicle;
-        public int health = 50;
+        private int health = 50;
         private int gold = 50;
+        private int score = 25;
         private Canvas _healthCanvas;
         private Image[] _health = new Image[5];
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";
         private readonly string _spritePathHalfHealth = "Sprites/Player/HalfHealth";
         private readonly string _spritePathFullHealth = "Sprites/Player/FullHealth";
         private TextMeshProUGUI _textGold;
+        private TextMeshProUGUI _textScore;
 
         private void Start()
         {
@@ -43,10 +45,16 @@ namespace DefaultNamespace
                     _textGold = textMeshPros[i];
 
                 }
+               
+                if (textMeshPros[i].name.Contains("PlayerScore"))
+                {
+                    _textScore = textMeshPros[i];
+                }
             }
             
             UpdatePlayerHealthIcons();
-            updateGoldUI();
+            UpdateGoldUI();
+            UpdateScoreUI();
 
         }
 
@@ -72,11 +80,30 @@ namespace DefaultNamespace
             {
                 gold = gold + value;
             }
+            UpdateGoldUI();
+        }
+        
+        public void UpdateScore(bool isNegative, int value)
+        {
+            if (isNegative)
+            {
+                score = Math.Max(0, score - value);
+            }
+            else
+            {
+                score = score + value;
+            }
+            UpdateScoreUI();
         }
 
-        private void updateGoldUI()
+        private void UpdateGoldUI()
         {
             _textGold.text = "$" + gold.ToString();
+        }
+        
+        private void UpdateScoreUI()
+        {
+            _textScore.text = "Score: " + score.ToString();
         }
 
         private void UpdatePlayerHealthIcons()
