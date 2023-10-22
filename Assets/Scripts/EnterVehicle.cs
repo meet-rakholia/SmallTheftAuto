@@ -17,6 +17,11 @@ namespace DefaultNamespace
                 Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
                 Rigidbody2D playerBody = other.GetComponent<Rigidbody2D>();
 
+                for (int i = 0; i < currentVehicle._vehicleHealth.Length; i++)
+                {
+                    currentVehicle._vehicleHealth[i].enabled = true;
+                }
+
                 currentVehicle.player = currentPlayer;
                 currentPlayer.isInVehicle = true;
                 boxCollider2D.enabled = false;

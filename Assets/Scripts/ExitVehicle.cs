@@ -24,7 +24,13 @@ namespace DefaultNamespace
         {
             if (Input.GetKeyDown(KeyCode.E) && _player.isInVehicle)
             {
+                
                 _vehicle = GameObject.Find("CurrentVehicle");
+                Vehicle currentVehicle = _vehicle.GetComponent<Vehicle>();
+                for (int i = 0; i < currentVehicle._vehicleHealth.Length; i++)
+                {
+                    currentVehicle._vehicleHealth[i].enabled = false;
+                }
                 _player.isInVehicle = false;
                 this.transform.parent = null;
                 UnityEngine.Vector3 relativePosition = _vehicle.transform.right * -1.5f;
