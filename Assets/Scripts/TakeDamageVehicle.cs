@@ -13,7 +13,10 @@ namespace DefaultNamespace
             if (other.gameObject.name.Contains("CurrentVehicle"))
             {
                 currentVehicle.Damage(5);
-                collisionVehicle.Damage(5);
+                if(collisionVehicle)
+                {
+                    collisionVehicle.Damage(5);
+                }
                 player.Damage(2);
                 
             }
