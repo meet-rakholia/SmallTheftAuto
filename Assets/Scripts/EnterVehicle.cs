@@ -6,6 +6,7 @@ namespace DefaultNamespace
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log("Entered");
             Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
             Player currentPlayer = other.GetComponent<Player>();
             if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle && currentVehicle.vehicleHealth != 0)
