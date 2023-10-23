@@ -8,9 +8,9 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         public bool isInVehicle;
-        private int health = 50;
-        private int gold = 50;
-        private int score = 25;
+        private int health = 100;
+        private int gold = 0;
+        private int score = 0;
         private Canvas _healthCanvas;
         private Image[] _health = new Image[5];
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";

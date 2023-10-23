@@ -23,7 +23,7 @@ namespace DefaultNamespace
 
             
 
-            if (_vehicle.player)
+            if (_vehicle.player && _vehicle.name == "CurrentVehicle")
             {
                 if (_vehicle.player.isInVehicle)
                 {
