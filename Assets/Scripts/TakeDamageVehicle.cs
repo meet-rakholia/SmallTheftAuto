@@ -17,7 +17,11 @@ namespace DefaultNamespace
                 {
                     collisionVehicle.Damage(5);
                 }
-                player.Damage(2);
+
+                if (currentVehicle.vehicleHealth == 0)
+                {
+                    player.Damage(25);
+                }
                 
             }
         }

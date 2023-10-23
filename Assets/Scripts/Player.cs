@@ -56,9 +56,9 @@ namespace DefaultNamespace
 
         }
 
-        public void Heal()
+        public void Heal(int value)
         {
-            health = Math.Max(100,health + 30);
+            health = Math.Max(100,health + value);
             UpdatePlayerHealthIcons();
         }
         
