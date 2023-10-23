@@ -64,7 +64,8 @@ namespace DefaultNamespace
         
         public void Damage(int damageAmount)
         {
-            health = Math.Min(0,health - damageAmount);
+            health = Math.Max(0,health - damageAmount);
+            Debug.Log(health);
             UpdatePlayerHealthIcons();
         }
 
