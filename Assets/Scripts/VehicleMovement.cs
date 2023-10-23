@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -32,7 +31,7 @@ namespace DefaultNamespace
                     {
                         Vector3 currentOrientation = this.transform.eulerAngles;
                         float newRotation = currentOrientation.z - horizontalInput*vehicleTurnRate * Time.deltaTime;
-                        this.transform.rotation = UnityEngine.Quaternion.Euler(0.0f,0.0f,newRotation);
+                        this.transform.rotation = Quaternion.Euler(0.0f,0.0f,newRotation);
                     }
                     
                     Vector3 movement = new Vector3(0.0f,verticalInput, 0.0f) * vehicleRunningSpeed;

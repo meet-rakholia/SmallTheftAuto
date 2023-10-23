@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace DefaultNamespace
 {
@@ -8,7 +7,7 @@ namespace DefaultNamespace
     {
         public Player player;
         private int vehicleHealth = 50;
-        private Canvas vehicleHealthCanvas;
+        private Canvas _vehicleHealthCanvas;
         public UnityEngine.UI.Image[] _vehicleHealth = new UnityEngine.UI.Image[5]; 
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";
         private readonly string _spritePathHalfHealthVehicle = "Sprites/Player/HalfHealthVehicle";
@@ -17,8 +16,8 @@ namespace DefaultNamespace
         private void Start()
         {
             GameObject canvasObject = GameObject.Find("Canvas");
-            vehicleHealthCanvas = canvasObject.GetComponent<Canvas>();
-            UnityEngine.UI.Image[] allImages = vehicleHealthCanvas.GetComponentsInChildren<UnityEngine.UI.Image>();
+            _vehicleHealthCanvas = canvasObject.GetComponent<Canvas>();
+            UnityEngine.UI.Image[] allImages = _vehicleHealthCanvas.GetComponentsInChildren<UnityEngine.UI.Image>();
 
 
             int j = 0;

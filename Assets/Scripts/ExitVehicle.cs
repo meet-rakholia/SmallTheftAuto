@@ -1,7 +1,5 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using Vector3 = System.Numerics.Vector3;
+
 
 namespace DefaultNamespace
 {
@@ -33,8 +31,8 @@ namespace DefaultNamespace
                 }
                 _player.isInVehicle = false;
                 this.transform.parent = null;
-                UnityEngine.Vector3 relativePosition = _vehicle.transform.right * -1.5f;
-                UnityEngine.Vector3 finalPosition = _vehicle.transform.position + relativePosition;
+                Vector3 relativePosition = _vehicle.transform.right * -1.5f;
+                Vector3 finalPosition = _vehicle.transform.position + relativePosition;
                 _player.transform.position = finalPosition;
                 _spriteRenderer.enabled = true;
                 _collider.enabled = true;
