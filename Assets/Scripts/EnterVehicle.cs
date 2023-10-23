@@ -6,15 +6,18 @@ namespace DefaultNamespace
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
             Player currentPlayer = other.GetComponent<Player>();
-            if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle)
+            if (other.gameObject.name == "Player" && !currentPlayer.isInVehicle && currentVehicle.vehicleHealth != 0)
             {
+                
                 GameObject vehicle = this.transform.parent.gameObject;
                 BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
-                SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
-                Vehicle currentVehicle = this.GetComponentInParent<Vehicle>();
+                SpriteRenderer spriteRendererPlayer = other.GetComponent<SpriteRenderer>();
+                SpriteRenderer spriteRendererVehicle = vehicle.GetComponent<SpriteRenderer>();
                 Rigidbody2D playerBody = other.GetComponent<Rigidbody2D>();
-
+                
+                currentVehicle.UpdateVehicleHealthIcons();
                 for (int i = 0; i < currentVehicle._vehicleHealth.Length; i++)
                 {
                     currentVehicle._vehicleHealth[i].enabled = true;
@@ -29,7 +32,8 @@ namespace DefaultNamespace
                 transform2.parent = vehicle.transform;
                 playerBody.isKinematic = true;
                 vehicle.name = "CurrentVehicle";
-                // spriteRenderer.enabled = false;
+                spriteRendererVehicle.color = Color.yellow;
+                // spriteRendererPlayer.enabled = false;
             }
         }
     }

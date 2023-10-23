@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 currentOrientation = this.transform.eulerAngles;
             float newRotation = currentOrientation.z - horizontalInput*playerTurnRate * Time.deltaTime;
             this.transform.rotation = Quaternion.Euler(0.0f,0.0f,newRotation);
-
         }
         
     }

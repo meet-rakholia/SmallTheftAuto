@@ -6,7 +6,7 @@ namespace DefaultNamespace
     public class Vehicle : MonoBehaviour
     {
         public Player player;
-        private int vehicleHealth = 100;
+        public int vehicleHealth = 100;
         private Canvas _vehicleHealthCanvas;
         public UnityEngine.UI.Image[] _vehicleHealth = new UnityEngine.UI.Image[5]; 
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";
@@ -40,7 +40,7 @@ namespace DefaultNamespace
             UpdateVehicleHealthIcons();
         }
 
-        private void UpdateVehicleHealthIcons()
+        public void UpdateVehicleHealthIcons()
         {
             if (vehicleHealth == 100)
             {
