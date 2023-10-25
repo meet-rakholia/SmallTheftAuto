@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (!_player.isInVehicle)
+        if (!_player.isInVehicle && !_player.isReadingAQuest)
         {
             Vector3 movement = new Vector3(0.0f,verticalInput, 0.0f) * playerRunningSpeed;
             this.transform.Translate(movement*Time.deltaTime);

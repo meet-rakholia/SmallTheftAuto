@@ -7,6 +7,7 @@ namespace DefaultNamespace
 {
     public class Player : MonoBehaviour
     {
+        public bool isReadingAQuest;
         public bool isInVehicle;
         private int health = 100;
         private int gold = 0;
