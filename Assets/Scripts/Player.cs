@@ -19,6 +19,7 @@ namespace DefaultNamespace
         private readonly string _spritePathFullHealth = "Sprites/Player/FullHealth";
         private TextMeshProUGUI _textGold;
         private TextMeshProUGUI _textScore;
+        public Quest _currentQuest;
 
         private void Start()
         {

@@ -9,17 +9,16 @@ namespace DefaultNamespace
 {
     public class QuestGiver : MonoBehaviour
     {
-        private GameObject _questPanel;
-        private String _currentQuest;
+        private GameObject _questPanel, _notificationPanel;
         private Quest _quest;
         private Player _player;
         private TextMeshProUGUI _questText;
         private void Start()
         {
-            _currentQuest = this.gameObject.name;
-            _quest = this.gameObject.GetComponent<Quest>();
             GameObject canvasGameObject = GameObject.Find("Canvas");
             _questPanel = canvasGameObject.transform.Find("QuestPanel").gameObject;
+            _notificationPanel = canvasGameObject.transform.Find("NotificationPanel").gameObject;
+            _quest = _questPanel.GetComponent<Quest>();
         }
 
         private void Update()
@@ -42,14 +41,20 @@ namespace DefaultNamespace
             if (other.gameObject.name == "Player")
             {
                 _player = other.gameObject.GetComponent<Player>();
-                GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
-                _questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
                 
-                if (!_player.isReadingAQuest)
+                if (!_player.isReadingAQuest && !_player._currentQuest)
                 {
+                    GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
+                    _questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
                     _questText.text += _quest.questText;
                     _questPanel.SetActive(true);
                     _player.isReadingAQuest = true;
+                }
+
+                if (_player._currentQuest)
+                {
+                    TextMeshProUGUI notificationText = _notificationPanel.GetComponentInChildren<TextMeshProUGUI>();
+                    Debug.Log(notificationText.text);
                 }
                 
             } 
