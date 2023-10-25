@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -11,20 +12,30 @@ namespace DefaultNamespace
         private TextMeshProUGUI _notificationtext;
         private void Start()
         {
-            _player = GameObject.Find("Player").GetComponent<Player>();
             GameObject canvasGameObject = GameObject.Find("Canvas");
             _notificationPanel = canvasGameObject.transform.Find("NotificationPanel").gameObject;
             _notificationtext = _notificationPanel.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        public onQuestClick()
+        public void onQuestClick()
         {
+            _player = GameObject.Find("Player").GetComponent<Player>();
             if (_player._currentQuest)
             {
-                _notificationtext = 
-                    _notificationPanel.SetActive(true);
+                StartCoroutine(showQuestCoroutine(_player._currentQuest.questText));
             }
+        }
+
+        private IEnumerator showQuestCoroutine(string message)
+        {
+            _notificationtext.text = message;
+            _notificationPanel.SetActive(true);
             
+
+            yield return new WaitForSeconds(5);
+
+            _notificationtext.text = "";
+            _notificationPanel.SetActive(false);
         }
     }
 }
