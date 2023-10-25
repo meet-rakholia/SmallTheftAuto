@@ -19,6 +19,8 @@ namespace DefaultNamespace
             _questPanel = canvasGameObject.transform.Find("QuestPanel").gameObject;
             _notificationPanel = canvasGameObject.transform.Find("NotificationPanel").gameObject;
             _quest = _questPanel.GetComponent<Quest>();
+            GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
+            _questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
         }
 
         private void Update()
@@ -32,20 +34,18 @@ namespace DefaultNamespace
                     _player.isReadingAQuest = false;
                     _player = null;
                 }
+                
             }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("In");
             if (other.gameObject.name == "Player")
             {
                 _player = other.gameObject.GetComponent<Player>();
                 
                 if (!_player.isReadingAQuest && !_player._currentQuest)
                 {
-                    GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
-                    _questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
                     _questText.text += _quest.questText;
                     _questPanel.SetActive(true);
                     _player.isReadingAQuest = true;
@@ -54,12 +54,23 @@ namespace DefaultNamespace
                 if (_player._currentQuest)
                 {
                     TextMeshProUGUI notificationText = _notificationPanel.GetComponentInChildren<TextMeshProUGUI>();
-                    Debug.Log(notificationText.text);
+                    _notificationPanel.SetActive(true);
+                    notificationText.text = "Player already has a quest";
+                    
                 }
                 
             } 
             
-            
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (_player){
+                if (_player._currentQuest)
+                {
+                    _notificationPanel.SetActive(false);
+                }
+            }
         }
     }
 }
