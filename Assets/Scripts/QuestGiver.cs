@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
+using System.Runtime.InteropServices.ComTypes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace DefaultNamespace
 {
@@ -9,6 +12,8 @@ namespace DefaultNamespace
         private GameObject _questPanel;
         private String _currentQuest;
         private Quest _quest;
+        private Player _player;
+        private TextMeshProUGUI _questText;
         private void Start()
         {
             _currentQuest = this.gameObject.name;
@@ -17,28 +22,39 @@ namespace DefaultNamespace
             _questPanel = canvasGameObject.transform.Find("QuestPanel").gameObject;
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void Update()
         {
-            if (other.gameObject.name == "Player" && Input.GetKeyDown(KeyCode.R))
+            if (_player)
             {
-                Player player = other.gameObject.GetComponent<Player>();
-                GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
-                TextMeshProUGUI questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
-                
-                if (!player.isReadingAQuest)
+                if (_player.isReadingAQuest && Input.GetKeyDown(KeyCode.E))
                 {
-                    questText.text += _quest.questText;
-                    _questPanel.SetActive(true);
-                    player.isReadingAQuest = true;
-                }
-                else
-                {
-                    questText.text = "";
+                    _questText.text = "Quest: ";
                     _questPanel.SetActive(false);
-                    player.isReadingAQuest = false;
+                    _player.isReadingAQuest = false;
+                    _player = null;
+                }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log("In");
+            if (other.gameObject.name == "Player")
+            {
+                _player = other.gameObject.GetComponent<Player>();
+                GameObject questTextGameObject = _questPanel.transform.Find("QuestText").gameObject;
+                _questText = questTextGameObject.GetComponent<TextMeshProUGUI>();
+                
+                if (!_player.isReadingAQuest)
+                {
+                    _questText.text += _quest.questText;
+                    _questPanel.SetActive(true);
+                    _player.isReadingAQuest = true;
                 }
                 
             } 
+            
+            
         }
     }
 }
