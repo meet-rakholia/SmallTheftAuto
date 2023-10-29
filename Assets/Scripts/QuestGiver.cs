@@ -46,7 +46,7 @@ namespace DefaultNamespace
                 
                 if (!_player.isReadingAQuest && !_player._currentQuest)
                 {
-                    _questText.text += _quest.questText;
+                    _questText.text += _quest.questText ;
                     _questPanel.SetActive(true);
                     _player.isReadingAQuest = true;
                 }

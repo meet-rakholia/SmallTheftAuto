@@ -20,6 +20,7 @@ namespace DefaultNamespace
         private TextMeshProUGUI _textGold;
         private TextMeshProUGUI _textScore;
         public Quest _currentQuest;
+        public int _numberOfCompletedQuests = 0;
 
         private void Start()
         {

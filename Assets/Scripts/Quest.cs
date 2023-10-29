@@ -7,5 +7,6 @@ namespace DefaultNamespace
     {
         public String questName;
         public String questText;
+
     }
 }

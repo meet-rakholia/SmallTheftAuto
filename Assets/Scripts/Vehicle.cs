@@ -12,6 +12,7 @@ namespace DefaultNamespace
         private readonly string _spritePathNoHealth = "Sprites/Player/NoHealth";
         private readonly string _spritePathHalfHealthVehicle = "Sprites/Player/HalfHealthVehicle";
         private readonly string _spritePathFullHealthVehicle = "Sprites/Player/FullHealthVehicle";
+        public string _name;
 
         private void Start()
         {
