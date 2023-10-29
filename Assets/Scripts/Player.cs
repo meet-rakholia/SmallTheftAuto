@@ -21,6 +21,7 @@ namespace DefaultNamespace
         private TextMeshProUGUI _textScore;
         public Quest _currentQuest;
         public int _numberOfCompletedQuests = 0;
+        public Item[] _items = new Item[3];
 
         private void Start()
         {
