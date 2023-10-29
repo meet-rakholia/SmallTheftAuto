@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -30,15 +31,33 @@ namespace DefaultNamespace
 
         private void Quest1Done()
         {
-            GameObject currentQuestPanel = GameObject.Find("Canvas").transform.Find("CurrentQuest").gameObject;
+            GameObject canvasGameObject = GameObject.Find("Canvas");
+            GameObject currentQuestPanel = canvasGameObject.transform.Find("CurrentQuest").gameObject;
             GameObject questButton = currentQuestPanel.transform.Find("Button").gameObject;
             TextMeshProUGUI currentQuestText = questButton.GetComponentInChildren<TextMeshProUGUI>();
+            GameObject notificationPanel = canvasGameObject.transform.Find("NotificationPanel").gameObject;
+            TextMeshProUGUI notificationtext = notificationPanel.GetComponentInChildren<TextMeshProUGUI>();
+            
+            StartCoroutine(ShowQuest1Done(notificationtext,notificationPanel,_vehicle.player._currentQuest.questName));
+            
             _vehicle.player._currentQuest = null;
             currentQuestText.text = "No Quest";
             _vehicle.player.UpdateGold(false,500);
             _vehicle.player._numberOfCompletedQuests += 1;
             currentQuestPanel.SetActive(false);
-         
+            
+        }
+
+        private IEnumerator ShowQuest1Done(TextMeshProUGUI _notificationtext, GameObject _notificationPanel, string questName)
+        {
+            _notificationtext.text = questName + ": Completed!!!";
+            _notificationPanel.SetActive(true);
+
+
+            yield return new WaitForSeconds(2);
+
+            _notificationtext.text = "";
+            _notificationPanel.SetActive(false);
         }
     }
 }
