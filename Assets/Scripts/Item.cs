@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -5,7 +7,11 @@ namespace DefaultNamespace
     public class Item : MonoBehaviour
     {
         public string name;
-
+        public ItemType itemType;
+        public Weapon weapon;
+        public HealthUp healthUp;
+        public PowerUp powerUp;
+        
         public enum ItemType
         {
             Weapon = 0,
