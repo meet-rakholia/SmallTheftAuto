@@ -8,6 +8,7 @@ namespace DefaultNamespace
     {
         public string name;
         public ItemType itemtype;
+        public Color itemColor; 
         
         public enum ItemType
         {

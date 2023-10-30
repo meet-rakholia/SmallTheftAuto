@@ -17,13 +17,10 @@ namespace DefaultNamespace
                 Item item = this.gameObject.GetComponent<Item>();
                 for (int i = 0; i < player._items.Length; i++)
                 {
-                    Debug.Log(playerItemSprite.color);
-                    Debug.Log(itemSprite.color);
                     if (player._items[i] == null)
                     {
                         player._items[i] = item;
-                        playerItemSprite.color = itemSprite.color;
-                        playerItemSprite.enabled = true;
+                        player._items[i].itemColor = itemSprite.color;
                         break;
                     }
                 }

@@ -22,6 +22,8 @@ namespace DefaultNamespace
         public Quest _currentQuest;
         public int _numberOfCompletedQuests = 0;
         public Item[] _items = new Item[3];
+        public Item _currentItem;
+        private int _itemIndex = 0;
 
         private void Start()
         {
@@ -58,6 +60,29 @@ namespace DefaultNamespace
             UpdateGoldUI();
             UpdateScoreUI();
 
+        }
+
+        private void Update()
+        {
+            if (!_currentItem)
+            {
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    if (_items[i])
+                    {
+                        _currentItem = _items[i];
+                        _itemIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q) && !isInVehicle)
+            {
+                int newItemIndex = _itemIndex < _items.Length ? _itemIndex + 1 : 0;
+                _currentItem = _items[newItemIndex];
+            }
+            
         }
 
         public void Heal(int value)
