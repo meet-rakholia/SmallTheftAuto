@@ -72,6 +72,7 @@ namespace DefaultNamespace
                     {
                         _currentItem = _items[i];
                         _itemIndex = i;
+                        UpdateItemUI();
                         break;
                     }
                 }
@@ -79,8 +80,8 @@ namespace DefaultNamespace
 
             if (Input.GetKeyDown(KeyCode.Q) && !isInVehicle)
             {
-                int newItemIndex = _itemIndex < _items.Length ? _itemIndex + 1 : 0;
-                _currentItem = _items[newItemIndex];
+                _itemIndex = _itemIndex < _items.Length-1 ? _itemIndex + 1 : 0;
+                _currentItem = _items[_itemIndex];
                 UpdateItemUI();
             }
             
