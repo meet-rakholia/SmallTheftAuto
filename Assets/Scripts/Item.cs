@@ -6,7 +6,7 @@ namespace DefaultNamespace
 {
     public class Item : MonoBehaviour
     {
-        public string name;
+        public string name = "";
         public ItemType itemtype;
         public Color itemColor; 
         

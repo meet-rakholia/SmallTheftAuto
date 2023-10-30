@@ -81,8 +81,25 @@ namespace DefaultNamespace
             {
                 int newItemIndex = _itemIndex < _items.Length ? _itemIndex + 1 : 0;
                 _currentItem = _items[newItemIndex];
+                UpdateItemUI();
             }
             
+        }
+
+        private void UpdateItemUI()
+        {
+            GameObject itemGameObject = this.gameObject.transform.Find("Item").gameObject;
+            SpriteRenderer itemSprite = itemGameObject.GetComponent<SpriteRenderer>();
+
+            if (!_currentItem)
+            {
+                itemSprite.enabled = false;
+            }
+            else
+            {
+                itemSprite.enabled = true;
+                itemSprite.color = _currentItem.itemColor;
+            }
         }
 
         public void Heal(int value)

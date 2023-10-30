@@ -17,14 +17,15 @@ namespace DefaultNamespace
                 Item item = this.gameObject.GetComponent<Item>();
                 for (int i = 0; i < player._items.Length; i++)
                 {
-                    if (player._items[i] == null)
+                    if (!player._items[i])
                     {
                         player._items[i] = item;
                         player._items[i].itemColor = itemSprite.color;
+                        this.gameObject.SetActive(false);
                         break;
                     }
                 }
-                this.gameObject.SetActive(false);
+                
             }
         }
     }
