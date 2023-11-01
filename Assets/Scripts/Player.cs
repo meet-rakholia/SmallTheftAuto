@@ -121,7 +121,7 @@ namespace DefaultNamespace
 
         public void Heal(int value)
         {
-            health = Math.Max(100,health + value);
+            health = Math.Min(100,health + value);
             UpdatePlayerHealthIcons();
         }
         

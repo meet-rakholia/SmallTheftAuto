@@ -20,7 +20,7 @@ namespace DefaultNamespace
 
                 if (currentVehicle.vehicleHealth == 0)
                 {
-                    player.Damage(25);
+                    player.Damage(50);
                 }
                 
             }
