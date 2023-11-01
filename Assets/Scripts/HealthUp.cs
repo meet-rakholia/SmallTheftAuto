@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class HealthUp : Item
+    public class HealthUp : MonoBehaviour
     {
+        public string name = "";
         public int heal;
     }
 }

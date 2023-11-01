@@ -1,21 +1,26 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class Item : MonoBehaviour
+    public class Item
     {
         public string name = "";
-        public ItemType itemtype;
-        public Color itemColor; 
+        public Color itemColor = Color.clear;
+        public int charge = 0;
+        public ItemType itemType = ItemType.NoItem;
+        public Dictionary<string, int> itemData = new Dictionary<string, int>() {};
         
         public enum ItemType
         {
-            Weapon = 0,
-            HealthUp = 1,
-            PowerUp = 2,
-            QuestItem = 3
+            NoItem = 0,
+            Weapon = 1,
+            Healthup = 2,
+            Powerup = 3,
+            Quest = 4
         }
     }
+    
 }

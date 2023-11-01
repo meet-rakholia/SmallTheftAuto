@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +23,8 @@ namespace DefaultNamespace
         private TextMeshProUGUI _textScore;
         public Quest _currentQuest;
         public int _numberOfCompletedQuests = 0;
-        public Item[] _items = new Item[3];
-        public Item _currentItem;
+        public Item[] _items = {new Item(), new Item(), new Item()};
+        public Item _currentItem = new Item();
         private int _itemIndex = 0;
 
         private void Start()
@@ -64,11 +66,11 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            if (!_currentItem)
+            if (_currentItem.itemType == Item.ItemType.NoItem)
             {
                 for (int i = 0; i < _items.Length; i++)
                 {
-                    if (_items[i])
+                    if (_items[i].itemType != Item.ItemType.NoItem)
                     {
                         _currentItem = _items[i];
                         _itemIndex = i;
@@ -84,15 +86,29 @@ namespace DefaultNamespace
                 _currentItem = _items[_itemIndex];
                 UpdateItemUI();
             }
-            
-        }
 
+            if (Input.GetKeyDown(KeyCode.Space) && !isInVehicle)
+            {
+                if (_currentItem.itemType == Item.ItemType.Healthup)
+                {
+                    Heal(_currentItem.itemData["heal"]);
+                    _currentItem.charge -= 1;
+                    if (_currentItem.charge == 0)
+                    {
+                        _currentItem = new Item();
+                        _items[_itemIndex] = new Item();
+                        UpdateItemUI();
+                    }
+                }
+            }
+        }
+        
         private void UpdateItemUI()
         {
             GameObject itemGameObject = this.gameObject.transform.Find("Item").gameObject;
             SpriteRenderer itemSprite = itemGameObject.GetComponent<SpriteRenderer>();
 
-            if (!_currentItem)
+            if (_currentItem.itemType == Item.ItemType.NoItem)
             {
                 itemSprite.enabled = false;
             }
