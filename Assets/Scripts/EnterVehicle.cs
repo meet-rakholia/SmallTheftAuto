@@ -34,7 +34,7 @@ namespace DefaultNamespace
                 playerBody.isKinematic = true;
                 vehicle.name = "CurrentVehicle";
                 spriteRendererVehicle.color = Color.yellow;
-                // spriteRendererPlayer.enabled = false;
+                spriteRendererPlayer.enabled = false;
             }
         }
     }
