@@ -8,11 +8,13 @@ namespace DefaultNamespace
     public class Quest1 : MonoBehaviour
     {
         private Vehicle _vehicle;
-
+        private PolygonCollider2D _quest1;
         private void Start()
         {
             GameObject vehicleGameObject = this.gameObject;
             _vehicle = vehicleGameObject.GetComponent<Vehicle>();
+            _quest1 = GameObject.Find("Quest1").GetComponent<PolygonCollider2D>();
+
         }
 
         private void Update()
@@ -58,6 +60,7 @@ namespace DefaultNamespace
 
             _notificationtext.text = "";
             _notificationPanel.SetActive(false);
+            Destroy(_quest1);
         }
     }
 }
