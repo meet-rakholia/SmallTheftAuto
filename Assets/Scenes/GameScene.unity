@@ -5216,6 +5216,7 @@ GameObject:
   - component: {fileID: 1507194883}
   - component: {fileID: 1507194884}
   - component: {fileID: 1507194885}
+  - component: {fileID: 1507194886}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -5302,6 +5303,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc32d36e9054afe9374bb16d550ac1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1507194886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507194882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72412b1188c1453fa859d0ae61ee771b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
 --- !u!1001 &1548975737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5573,6 +5587,7 @@ MonoBehaviour:
   isInVehicle: 0
   _currentQuest: {fileID: 0}
   _numberOfCompletedQuests: 0
+  _itemIndex: 0
 --- !u!114 &1556139250
 MonoBehaviour:
   m_ObjectHideFlags: 0

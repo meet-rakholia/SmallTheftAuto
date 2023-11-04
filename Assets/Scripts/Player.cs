@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace DefaultNamespace
         public int _numberOfCompletedQuests = 0;
         public Item[] _items = {new Item(), new Item(), new Item()};
         public Item _currentItem = new Item();
-        private int _itemIndex = 0;
+        public int _itemIndex = 0;
 
         private void Start()
         {
@@ -63,65 +64,7 @@ namespace DefaultNamespace
             UpdateScoreUI();
 
         }
-
-        private void Update()
-        {
-            if (_currentItem.itemType == Item.ItemType.NoItem)
-            {
-                for (int i = 0; i < _items.Length; i++)
-                {
-                    if (_items[i].itemType != Item.ItemType.NoItem)
-                    {
-                        _currentItem = _items[i];
-                        _itemIndex = i;
-                        UpdateItemUI();
-                        break;
-                    }
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Q) && !isInVehicle)
-            {
-                _itemIndex = _itemIndex < _items.Length-1 ? _itemIndex + 1 : 0;
-                _currentItem = _items[_itemIndex];
-                UpdateItemUI();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space) && !isInVehicle)
-            {
-                if (_currentItem.itemType == Item.ItemType.Healthup)
-                {
-                    Heal(_currentItem.itemData["heal"]);
-                    _currentItem.charge -= 1;
-                    if (_currentItem.charge == 0)
-                    {
-                        _currentItem = new Item();
-                        _items[_itemIndex] = new Item();
-                        UpdateItemUI();
-                    }
-                } else if (_currentItem.itemType == Item.ItemType.Weapon)
-                {
-                    UpdateItemUI();
-                }
-            }
-        }
         
-        private void UpdateItemUI()
-        {
-            GameObject itemGameObject = this.gameObject.transform.Find("Item").gameObject;
-            SpriteRenderer itemSprite = itemGameObject.GetComponent<SpriteRenderer>();
-
-            if (_currentItem.itemType == Item.ItemType.NoItem)
-            {
-                itemSprite.enabled = false;
-            }
-            else
-            {
-                itemSprite.enabled = true;
-                itemSprite.sprite = _currentItem.itemSprite;
-            }
-        }
-
         public void Heal(int value)
         {
             health = Math.Min(100,health + value);
