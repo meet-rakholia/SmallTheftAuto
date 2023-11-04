@@ -99,6 +99,9 @@ namespace DefaultNamespace
                         _items[_itemIndex] = new Item();
                         UpdateItemUI();
                     }
+                } else if (_currentItem.itemType == Item.ItemType.Weapon)
+                {
+                    UpdateItemUI();
                 }
             }
         }
@@ -115,7 +118,7 @@ namespace DefaultNamespace
             else
             {
                 itemSprite.enabled = true;
-                itemSprite.color = _currentItem.itemColor;
+                itemSprite.sprite = _currentItem.itemSprite;
             }
         }
 

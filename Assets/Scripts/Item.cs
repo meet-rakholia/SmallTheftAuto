@@ -8,7 +8,7 @@ namespace DefaultNamespace
     public class Item
     {
         public string name = "";
-        public Color itemColor = Color.clear;
+        public Sprite itemSprite;
         public int charge = 0;
         public ItemType itemType = ItemType.NoItem;
         public Dictionary<string, int> itemData = new Dictionary<string, int>() {};
