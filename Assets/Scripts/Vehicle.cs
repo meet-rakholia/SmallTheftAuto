@@ -13,15 +13,17 @@ namespace DefaultNamespace
         private readonly string _spritePathHalfHealthVehicle = "Sprites/Player/HalfHealthVehicle";
         private readonly string _spritePathFullHealthVehicle = "Sprites/Player/FullHealthVehicle";
         public string _name;
+        private bool isVehicleDestroyed;
 
         private void Update()
         {
-            if (vehicleHealth == 0)
+            if (vehicleHealth == 0 && !isVehicleDestroyed)
             {
                 SpriteRenderer vehicleSprite = this.gameObject.GetComponent<SpriteRenderer>();
+                Transform door = this.gameObject.transform.Find("Door");door = this.gameObject.transform.Find("Door");
                 vehicleSprite.color = Color.gray;
-                Transform door = this.gameObject.transform.Find("Door");
-                Destroy(door.gameObject); 
+                Destroy(door.gameObject);
+                isVehicleDestroyed = true;
             }
         }
         
@@ -31,7 +33,6 @@ namespace DefaultNamespace
             GameObject canvasObject = GameObject.Find("Canvas");
             _vehicleHealthCanvas = canvasObject.GetComponent<Canvas>();
             UnityEngine.UI.Image[] allImages = _vehicleHealthCanvas.GetComponentsInChildren<UnityEngine.UI.Image>();
-
 
             int j = 0;
             for (int i = 0; i < allImages.Length; i++)
