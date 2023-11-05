@@ -11,12 +11,11 @@ namespace DefaultNamespace
             if (other.gameObject.name.Contains("Vehicle"))
             {
                 Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
-                vehicle.Damage(5);
+                Bullet bullet = this.gameObject.GetComponent<Bullet>();
+                vehicle.Damage(bullet.damage);
                 this.gameObject.SetActive(false);
             } else if (other.gameObject.name.Contains("Building") || other.gameObject.name.Contains("Wall"))
             {
-                this.gameObject.transform.position = new Vector3();
-                this.gameObject.transform.rotation = new Quaternion();
                 this.gameObject.SetActive(false);
             }
         }

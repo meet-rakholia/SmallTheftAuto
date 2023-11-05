@@ -46,12 +46,6 @@ namespace DefaultNamespace
                     _collider.enabled = true;
                     _rigidbody.isKinematic = false;
                     _vehicle.name = "Vehicle";
-                    vehicleSprite.color = _currentVehicle.vehicleHealth == 0 ? Color.gray : Color.white;
-                    if(_currentVehicle.vehicleHealth == 0){
-                        Transform door = _vehicle.transform.Find("Door");
-                        Destroy(door.gameObject); 
-                    }
-                    _vehicle = null;
                 }
             }
                 

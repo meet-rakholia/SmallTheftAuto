@@ -14,6 +14,18 @@ namespace DefaultNamespace
         private readonly string _spritePathFullHealthVehicle = "Sprites/Player/FullHealthVehicle";
         public string _name;
 
+        private void Update()
+        {
+            if (vehicleHealth == 0)
+            {
+                SpriteRenderer vehicleSprite = this.gameObject.GetComponent<SpriteRenderer>();
+                vehicleSprite.color = Color.gray;
+                Transform door = this.gameObject.transform.Find("Door");
+                Destroy(door.gameObject); 
+            }
+        }
+        
+
         private void Start()
         {
             GameObject canvasObject = GameObject.Find("Canvas");

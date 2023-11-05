@@ -10,10 +10,18 @@ namespace DefaultNamespace
        
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Bullet bullet;
             if (other.gameObject.name == "Player")
             {
                 Weapon weapon = this.gameObject.GetComponent<Weapon>();
-                GameObject item =  other.gameObject.transform.GetChild(0).gameObject;
+                for (int i = 0; i < other.gameObject.transform.childCount; i++)
+                {
+                    if (other.gameObject.transform.GetChild(i).gameObject.GetComponent<Bullet>())
+                    {
+                        bullet = other.gameObject.transform.GetChild(i).gameObject.GetComponent<Bullet>();
+                        bullet.damage = weapon.damage;
+                    }
+                }
                 for (int i = 0; i < this.gameObject.transform.childCount; i++)
                 {
                     GameObject child = this.gameObject.transform.GetChild(i).gameObject;
@@ -23,8 +31,6 @@ namespace DefaultNamespace
                         break;
                     }
                 }
-                
-                
                 
                 SpriteRenderer itemSprite = this.GetComponent<SpriteRenderer>();
                 Player player = other.GetComponent<Player>();
