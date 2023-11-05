@@ -12,10 +12,22 @@ namespace DefaultNamespace
         {
             if (other.gameObject.name == "Player")
             {
+                Weapon weapon = this.gameObject.GetComponent<Weapon>();
+                GameObject item =  other.gameObject.transform.GetChild(0).gameObject;
+                for (int i = 0; i < this.gameObject.transform.childCount; i++)
+                {
+                    GameObject child = this.gameObject.transform.GetChild(i).gameObject;
+                    if (child.GetComponent<BulletPoolManager>())
+                    {
+                        child.transform.parent = other.transform;
+                        break;
+                    }
+                }
+                
+                
+                
                 SpriteRenderer itemSprite = this.GetComponent<SpriteRenderer>();
                 Player player = other.GetComponent<Player>();
-                Weapon weapon = this.gameObject.GetComponent<Weapon>();
-                
                 for (int i = 0; i < player._items.Length; i++)
                 {
                     if (player._items[i].itemType == Item.ItemType.Weapon)
@@ -39,10 +51,7 @@ namespace DefaultNamespace
                             {"ammo", weapon.ammo},
                             {"magazine", weapon.magazine},
                             {"currentBullets", weapon.currentBullets},
-                            {"attackRate", weapon.attackRate},
-                            {"projectileSpeed", weapon.projectileSpeed},
-                            {"attackRange",weapon.attackRange}
-                            
+                            {"force", weapon.force},
                         };
                         player._items[i].itemType = Item.ItemType.Weapon;
                         Destroy(this.gameObject);

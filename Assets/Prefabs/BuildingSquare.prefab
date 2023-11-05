@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8911364702202800900}
   - component: {fileID: 8854211455809076811}
   - component: {fileID: 7641048739106614166}
-  - component: {fileID: 7219095896337471568}
   - component: {fileID: 2104809575235102915}
   m_Layer: 6
   m_Name: BuildingSquare
@@ -114,18 +113,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7219095896337471568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004787121286294850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ba0dfd7c324344b1972ce356a2da54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2104809575235102915
 BoxCollider2D:
   m_ObjectHideFlags: 0

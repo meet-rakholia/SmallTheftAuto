@@ -8,9 +8,7 @@ namespace DefaultNamespace
         public int damage;
         public int currentBullets;
         public int magazine;
-        public int attackRate;
-        public int projectileSpeed;
-        public int attackRange;
         public int ammo;
+        public int force;
     }
 }

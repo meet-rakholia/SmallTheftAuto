@@ -7,10 +7,10 @@ namespace DefaultNamespace
     {
         private void OnCollisionEnter2D(Collision2D other)
         {
-            Vehicle currentVehicle = other.gameObject.GetComponent<Vehicle>();
-            Vehicle collisionVehicle = this.gameObject.GetComponent<Vehicle>();
-            Player player = other.gameObject.GetComponentInChildren<Player>();
-            if (other.gameObject.name.Contains("CurrentVehicle"))
+            Vehicle collisionVehicle = other.gameObject.GetComponent<Vehicle>();
+            Vehicle currentVehicle = this.gameObject.GetComponent<Vehicle>();
+            Player player = this.gameObject.GetComponentInChildren<Player>();
+            if (other.gameObject.name.Contains("Vehicle") || other.gameObject.name.Contains("Building"))
             {
                 currentVehicle.Damage(5);
                 if(collisionVehicle)
@@ -20,7 +20,10 @@ namespace DefaultNamespace
 
                 if (currentVehicle.vehicleHealth == 0)
                 {
-                    player.Damage(50);
+                    if (player)
+                    {
+                        player.Damage(50);
+                    }
                 }
                 
             }

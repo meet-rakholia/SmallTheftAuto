@@ -7,10 +7,13 @@ namespace DefaultNamespace
     public class UseItem : MonoBehaviour
     {
         public Player _player;
+        public BulletPoolManager _bulletPoolManager;
 
         private void Start()
         {
-            _player = this.gameObject.transform.parent.gameObject.GetComponent<Player>();
+            Transform parent = this.gameObject.transform.parent;
+            _player = parent.gameObject.GetComponent<Player>();
+
         }
 
         private void Update()
@@ -50,14 +53,30 @@ namespace DefaultNamespace
                 } else if (_player._currentItem.itemType == Item.ItemType.Weapon)
                 {
                     Fire();
-                    UpdateItemUI();
                 }
             }
         }
 
         private void Fire()
         {
-            
+            if (!_bulletPoolManager)
+            {
+                _bulletPoolManager = this.gameObject.transform.parent.GetComponentInChildren<BulletPoolManager>();
+            }
+            GameObject bullet = _bulletPoolManager.getBullet();
+            SpriteRenderer bulletSprite = bullet.GetComponent<SpriteRenderer>();
+            bullet.SetActive(true); 
+            bulletSprite.enabled = true;
+            var parent = this.gameObject.transform.parent;
+            var position = parent.position;
+            float angle = parent.rotation.eulerAngles.z;
+            bullet.transform.position = this.gameObject.transform.position;
+            bullet.transform.rotation = parent.rotation;
+            Rigidbody2D bulletRigidbody2D = bullet.GetComponent<Rigidbody2D>();
+            bulletRigidbody2D.AddForce(
+                new Vector2(-_player._currentItem.itemData["force"] * (float)Math.Sin(angle * Math.PI / 180),
+                    (float)_player._currentItem.itemData["force"] * (float)Math.Cos(angle * Math.PI / 180)),
+                ForceMode2D.Impulse);
         }
         
         private void UpdateItemUI()
