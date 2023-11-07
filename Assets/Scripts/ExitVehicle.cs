@@ -17,6 +17,7 @@ namespace DefaultNamespace
             _spriteRenderer = this.GetComponent<SpriteRenderer>();
             _collider = this.GetComponent<BoxCollider2D>();
             _rigidbody = this.GetComponent<Rigidbody2D>();
+            
         }
 
         private void Update()
@@ -25,14 +26,14 @@ namespace DefaultNamespace
             {
                 if (!_vehicle)
                 {
-                    _vehicle = GameObject.Find("CurrentVehicle");
+                    _vehicle = this.transform.parent.gameObject;
                     _currentVehicle = _vehicle.GetComponent<Vehicle>(); 
                 }
                 
                 if(Input.GetKeyDown(KeyCode.E) || _currentVehicle.vehicleHealth == 0)
                 {
                 
-                    SpriteRenderer vehicleSprite = _vehicle.GetComponent<SpriteRenderer>();
+                    SpriteRenderer itemSprite = this.transform.Find("Item").GetComponent<SpriteRenderer>();
                     for (int i = 0; i < _currentVehicle._vehicleHealth.Length; i++)
                     {
                         _currentVehicle._vehicleHealth[i].enabled = false;
@@ -43,9 +44,15 @@ namespace DefaultNamespace
                     Vector3 finalPosition = _vehicle.transform.position + relativePosition;
                     _player.transform.position = finalPosition;
                     _spriteRenderer.enabled = true;
+                    if (_player._currentItem.itemType != Item.ItemType.NoItem)
+                    {
+                        itemSprite.enabled = true;
+                    }
                     _collider.enabled = true;
                     _rigidbody.isKinematic = false;
                     _vehicle.name = "Vehicle";
+                    _vehicle = null;
+                    
                 }
             }
                 

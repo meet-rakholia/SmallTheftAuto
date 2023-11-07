@@ -46,7 +46,6 @@ namespace DefaultNamespace
             currentQuestText.text = "No Quest";
             _vehicle.player.UpdateGold(false,500);
             _vehicle.player._numberOfCompletedQuests += 1;
-            currentQuestPanel.SetActive(false);
             
         }
 

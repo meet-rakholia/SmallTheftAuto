@@ -15,6 +15,7 @@ namespace DefaultNamespace
                 GameObject vehicle = this.transform.parent.gameObject;
                 BoxCollider2D boxCollider2D = other.GetComponent<BoxCollider2D>();
                 SpriteRenderer spriteRendererPlayer = other.GetComponent<SpriteRenderer>();
+                SpriteRenderer itemSpriteRenderer = other.transform.Find("Item").GetComponent<SpriteRenderer>();
                 SpriteRenderer spriteRendererVehicle = vehicle.GetComponent<SpriteRenderer>();
                 Rigidbody2D playerBody = other.GetComponent<Rigidbody2D>();
                 
@@ -35,6 +36,7 @@ namespace DefaultNamespace
                 vehicle.name = "CurrentVehicle";
                 spriteRendererVehicle.color = Color.yellow;
                 spriteRendererPlayer.enabled = false;
+                itemSpriteRenderer.enabled = false;
             }
         }
     }
