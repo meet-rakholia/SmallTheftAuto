@@ -7,7 +7,6 @@ namespace DefaultNamespace
 {
     public class WeaponCollider : MonoBehaviour
     {
-       
         private void OnTriggerEnter2D(Collider2D other)
         {
             BulletPoolManager bpm;
@@ -15,26 +14,33 @@ namespace DefaultNamespace
             {
                 Weapon weapon = this.gameObject.GetComponent<Weapon>();
 
-                for (int i = 0; i < this.gameObject.transform.childCount; i++)
+                if (!other.gameObject.GetComponent<BulletPoolManager>())
                 {
-                    GameObject child = this.gameObject.transform.GetChild(i).gameObject;
-                    if (child.GetComponent<BulletPoolManager>())
+                    for (int i = 0; i < this.gameObject.transform.childCount; i++)
                     {
+                        GameObject child = this.gameObject.transform.GetChild(i).gameObject;
+                        if (child.GetComponent<BulletPoolManager>())
+                        {
                         
-                        child.transform.parent = other.transform;
+                            child.transform.parent = other.transform;
                         
-                        break;
+                            break;
+                        }
                     }
                 }
                 
                 SpriteRenderer itemSprite = this.GetComponent<SpriteRenderer>();
                 Player player = other.GetComponent<Player>();
+                UseItem useItem = other.gameObject.GetComponentInChildren<UseItem>();
+                
                 for (int i = 0; i < player._items.Length; i++)
                 {
                     if (player._items[i].itemType == Item.ItemType.Weapon)
                     {
-                        if(player._items[i].itemData["currentBBullets"] == weapon.maxBullets) return;
-                        player._items[i].itemData["currentsBullets"] = Math.Min(player._items[i].itemData["currentsBullets"] + weapon.currentBullets, weapon.maxBullets);
+                        if(player._items[i].itemData["currentBullets"] == weapon.maxBullets) return;
+                        player._items[i].itemData["currentBullets"] = Math.Min(
+                            player._items[i].itemData["currentBullets"] + weapon.currentBullets, weapon.maxBullets);
+                        useItem.UpdateItemUI();
                         Destroy(this.gameObject);
                         return;
                     }
@@ -50,7 +56,7 @@ namespace DefaultNamespace
                         player._items[i].itemData = new Dictionary<string, int>()
                         {
                             {"damage", weapon.damage },
-                            {"ammo", weapon.maxBullets},
+                            {"maxBullets", weapon.maxBullets},
                             {"currentBullets", weapon.currentBullets},
                             {"force", weapon.force},
                         };

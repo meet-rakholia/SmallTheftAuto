@@ -53,11 +53,15 @@ namespace DefaultNamespace
                     {
                         _player._currentItem = new Item();
                         _player._items[_player._itemIndex] = new Item();
-                        UpdateItemUI();
+                        
                     }
+                    UpdateItemUI();
                 } else if (_player._currentItem.itemType == Item.ItemType.Weapon)
                 {
-                    Fire();
+                    if (_player._currentItem.itemData["currentBullets"] > 0)
+                    {
+                        Fire();
+                    }
                 }
             }
         }
@@ -68,6 +72,11 @@ namespace DefaultNamespace
             {
                 _bulletPoolManager = this.gameObject.transform.parent.GetComponentInChildren<BulletPoolManager>();
             }
+
+            _player._currentItem.itemData["currentBullets"] =
+                Math.Max(0, _player._currentItem.itemData["currentBullets"]-1);
+            itemCharge.text =
+                $"Charge: {_player._currentItem.itemData["currentBullets"]}/{_player._currentItem.itemData["maxBullets"]}";
             GameObject bullet = _bulletPoolManager.getBullet();
             SpriteRenderer bulletSprite = bullet.GetComponent<SpriteRenderer>();
             bullet.SetActive(true); 
@@ -84,7 +93,7 @@ namespace DefaultNamespace
                 ForceMode2D.Impulse);
         }
         
-        private void UpdateItemUI()
+        public void UpdateItemUI()
         {
             SpriteRenderer itemSprite = this.gameObject.GetComponent<SpriteRenderer>();
 
