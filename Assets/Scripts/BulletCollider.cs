@@ -8,14 +8,16 @@ namespace DefaultNamespace
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name.Contains("Vehicle"))
+            Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
+            Building building = other.gameObject.GetComponent<Building>();
+            Wall wall = other.gameObject.GetComponent<Wall>();
+            if (vehicle)
             {
                 Player player = GameObject.Find("Player").GetComponent<Player>();
-                Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
                 Bullet bullet = this.gameObject.GetComponent<Bullet>();
                 vehicle.Damage(player._currentItem.itemData["damage"]);
                 this.gameObject.SetActive(false);
-            } else if (other.gameObject.name.Contains("Building") || other.gameObject.name.Contains("Wall"))
+            } else if (building || wall)
             {
                 this.gameObject.SetActive(false);
             }
