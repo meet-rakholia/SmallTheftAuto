@@ -1,6 +1,8 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DefaultNamespace
 {
@@ -8,6 +10,9 @@ namespace DefaultNamespace
     {
         public Player _player;
         public BulletPoolManager _bulletPoolManager;
+        public TextMeshProUGUI itemName;
+        public TextMeshProUGUI itemCharge;
+        public Image itemImage;
 
         private void Start()
         {
@@ -86,11 +91,26 @@ namespace DefaultNamespace
             if (_player._currentItem.itemType == Item.ItemType.NoItem)
             {
                 itemSprite.enabled = false;
+                itemImage.sprite = null;
+                itemName.text = "No Item";
+                itemCharge.text = "Charge: 0";
             }
             else
             {
                 itemSprite.enabled = true;
                 itemSprite.sprite = _player._currentItem.itemSprite;
+                itemImage.sprite = _player._currentItem.itemSprite;;
+                itemName.text = _player._currentItem.name;;
+                if (_player._currentItem.itemType == Item.ItemType.Weapon)
+                {
+                    itemCharge.text =
+                        $"Charge: {_player._currentItem.itemData["currentBullets"]}/{_player._currentItem.itemData["maxBullets"]}";
+                }
+                else
+                {
+                    itemCharge.text = 
+                        $"Charge: {_player._currentItem.charge}";
+                }
             }
         }
     }

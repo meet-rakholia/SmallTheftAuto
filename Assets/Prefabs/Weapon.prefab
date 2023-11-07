@@ -179,12 +179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430e6a9345bc4f659ec4646dd790f797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Rifle
   damage: 0
   currentBullets: 0
-  magazine: 0
-  ammo: 0
-  projectileSpeed: 2
+  maxBullets: 0
+  force: 0
 --- !u!1 &6396620574943107505
 GameObject:
   m_ObjectHideFlags: 0

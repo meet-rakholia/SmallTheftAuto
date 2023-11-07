@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ddb1710075443dae0985198b8fde3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Health Potion
   heal: 10
 --- !u!114 &7561099176643465939
 MonoBehaviour:

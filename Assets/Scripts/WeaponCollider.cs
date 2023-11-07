@@ -33,7 +33,8 @@ namespace DefaultNamespace
                 {
                     if (player._items[i].itemType == Item.ItemType.Weapon)
                     {
-                        player._items[i].itemData["ammo"] = weapon.ammo;
+                        if(player._items[i].itemData["currentBBullets"] == weapon.maxBullets) return;
+                        player._items[i].itemData["currentsBullets"] = Math.Min(player._items[i].itemData["currentsBullets"] + weapon.currentBullets, weapon.maxBullets);
                         Destroy(this.gameObject);
                         return;
                     }
@@ -49,8 +50,7 @@ namespace DefaultNamespace
                         player._items[i].itemData = new Dictionary<string, int>()
                         {
                             {"damage", weapon.damage },
-                            {"ammo", weapon.ammo},
-                            {"magazine", weapon.magazine},
+                            {"ammo", weapon.maxBullets},
                             {"currentBullets", weapon.currentBullets},
                             {"force", weapon.force},
                         };
